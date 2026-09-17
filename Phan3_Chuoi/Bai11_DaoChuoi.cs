@@ -4,64 +4,39 @@ using System.Text;
 namespace NNLTC.Phan3_Chuoi
 {
     /// <summary>
-    /// BÀI 11: ĐẢO NGƯỢC CHUỖI VỚI STRINGBUILDER
-    /// Yêu cầu:
-    /// Viết phương thức thành viên trả về chuỗi là đảo của một chuỗi.
-    /// Sử dụng lớp StringBuilder trong namespace System.Text để tối ưu hóa hiệu năng ghép chuỗi.
+    /// BÀI 11: ĐẢO NGƯỢC CHUỖI (SỬ DỤNG STRINGBUILDER)
     /// </summary>
     public class DaoChuoiHelper
     {
-        /// <summary>
-        /// Phương thức thành viên thực hiện đảo ngược chuỗi
-        /// </summary>
-        /// <param name="s">Chuỗi gốc ban đầu</param>
-        /// <returns>Chuỗi mới có thứ tự các ký tự đảo ngược</returns>
+        // Phương thức thành viên đảo ngược chuỗi
         public string DaoChuoi(string s)
         {
-            // Kiểm tra chuỗi rỗng hoặc null
-            if (string.IsNullOrEmpty(s))
-            {
-                return s;
-            }
+            if (string.IsNullOrEmpty(s)) return s;
 
-            // Sử dụng StringBuilder với dung lượng khởi tạo bằng độ dài chuỗi s
-            // để tránh phân mảnh bộ nhớ khi nối chuỗi trong vòng lặp (chuỗi string trong C# là immutable)
-            StringBuilder sb = new StringBuilder(s.Length);
-
-            // Duyệt ngược từ ký tự cuối cùng về ký tự đầu tiên của chuỗi
+            StringBuilder sb = new StringBuilder();
             for (int i = s.Length - 1; i >= 0; i--)
             {
-                sb.Append(s[i]); // Thêm từng ký tự vào StringBuilder
+                sb.Append(s[i]);
             }
-
-            // Chuyển StringBuilder thành string và trả về kết quả
             return sb.ToString();
         }
     }
 
     public static class Bai11_DaoChuoi
     {
-        /// <summary>
-        /// Phương thức thực thi chính của Bài 11
-        /// </summary>
         public static void Chay()
         {
-            Console.WriteLine("==================================================================");
-            Console.WriteLine("        BÀI 11: ĐẢO NGƯỢC CHUỖI (SỬ DỤNG STRINGBUILDER)          ");
-            Console.WriteLine("==================================================================");
+            Console.WriteLine("=== BÀI 11: ĐẢO NGƯỢC CHUỖI ===");
 
-            Console.Write("Nhap chuoi can dao nguoc: ");
+            Console.Write("Nhap chuoi can dao: ");
             string s = Console.ReadLine() ?? "";
 
-            // Khởi tạo đối tượng lớp DaoChuoiHelper
+            // Khởi tạo đối tượng để gọi phương thức thành viên
             DaoChuoiHelper helper = new DaoChuoiHelper();
             string ketQua = helper.DaoChuoi(s);
 
-            // Xuất kết quả
-            Console.WriteLine("\n--- KET QUA ---");
-            Console.WriteLine($"Chuoi ban dau   : \"{s}\"");
+            Console.WriteLine($"\nChuoi ban dau    : \"{s}\"");
             Console.WriteLine($"Chuoi sau khi dao: \"{ketQua}\"");
-            Console.WriteLine("==================================================================");
         }
     }
 }

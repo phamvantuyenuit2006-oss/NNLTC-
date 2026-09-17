@@ -1,68 +1,59 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace NNLTC.Phan5_MangArrayList
 {
     /// <summary>
-    /// Bài 17: Mảng 2 chiều
-    /// • Sinh ngẫu nhiên mảng A[nxm] trong đoạn [10, 100] (n,m nhập từ bàn phím)
-    /// • In mảng ra màn hình
-    /// • Trả về hai mảng: mảng các số chẵn và mảng các số lẻ
+    /// BÀI 17: MẢNG 2 CHIỀU (SINH NGẪU NHIÊN [10, 100], TÁCH CHẴN LẺ)
     /// </summary>
     public class MangHaiChieuHelper
     {
-        private static readonly Random random = new Random();
-
-        public static int[,] SinhMangNgauNhien(int n, int m, int minVal = 10, int maxVal = 100)
+        // 1. Sinh ngẫu nhiên ma trận n dòng x m cột trong khoảng [10, 100]
+        public static int[,] SinhMaTran(int n, int m)
         {
-            int[,] matrix = new int[n, m];
+            Random rd = new Random();
+            int[,] a = new int[n, m];
+
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < m; j++)
                 {
-                    // Next(min, max + 1) để lấy giá trị trong đoạn [minVal, maxVal]
-                    matrix[i, j] = random.Next(minVal, maxVal + 1);
+                    a[i, j] = rd.Next(10, 101); // Lấy ngẫu nhiên từ 10 đến 100
                 }
             }
-            return matrix;
+            return a;
         }
 
-        public static void InMaTran(int[,] matrix)
+        // 2. In ma trận ra màn hình
+        public static void InMaTran(int[,] a, int n, int m)
         {
-            int n = matrix.GetLength(0);
-            int m = matrix.GetLength(1);
-
-            Console.WriteLine($"Ma tran A [{n}x{m}]:");
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < m; j++)
                 {
-                    Console.Write($"{matrix[i, j],5} ");
+                    Console.Write($"{a[i, j],5} ");
                 }
                 Console.WriteLine();
             }
         }
 
-        public static void TachChanLe(int[,] matrix, out int[] mangChan, out int[] mangLe)
+        // 3. Tách ma trận thành 2 mảng: mảng số chẵn và mảng số lẻ
+        public static void TachChanLe(int[,] a, int n, int m, out int[] mangChan, out int[] mangLe)
         {
             List<int> dsChan = new List<int>();
             List<int> dsLe = new List<int>();
-
-            int n = matrix.GetLength(0);
-            int m = matrix.GetLength(1);
 
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < m; j++)
                 {
-                    int val = matrix[i, j];
-                    if (val % 2 == 0)
+                    if (a[i, j] % 2 == 0)
                     {
-                        dsChan.Add(val);
+                        dsChan.Add(a[i, j]);
                     }
                     else
                     {
-                        dsLe.Add(val);
+                        dsLe.Add(a[i, j]);
                     }
                 }
             }
@@ -76,38 +67,27 @@ namespace NNLTC.Phan5_MangArrayList
     {
         public static void Chay()
         {
-            Console.WriteLine("=== BAI 17: MANG HAI CHIEU (SINH NGAU NHIEN [10, 100], TACH CHAN LE) ===");
-            int n, m;
+            Console.WriteLine("=== BÀI 17: MẢNG HAI CHIỀU ===");
 
-            while (true)
-            {
-                Console.Write("Nhap so dong n (n > 0): ");
-                if (int.TryParse(Console.ReadLine(), out n) && n > 0)
-                {
-                    break;
-                }
-                Console.WriteLine("So dong phai la so nguyen duong!");
-            }
+            Console.Write("Nhap so dong n: ");
+            int n = int.Parse(Console.ReadLine() ?? "0");
 
-            while (true)
-            {
-                Console.Write("Nhap so cot m (m > 0): ");
-                if (int.TryParse(Console.ReadLine(), out m) && m > 0)
-                {
-                    break;
-                }
-                Console.WriteLine("So cot phai la so nguyen duong!");
-            }
+            Console.Write("Nhap so cot m: ");
+            int m = int.Parse(Console.ReadLine() ?? "0");
 
-            int[,] matrix = MangHaiChieuHelper.SinhMangNgauNhien(n, m, 10, 100);
-            Console.WriteLine("\n--- MA TRAN DUOC SINH NGAU NHIEN ---");
-            MangHaiChieuHelper.InMaTran(matrix);
+            // 1. Sinh mảng ngẫu nhiên
+            int[,] a = MangHaiChieuHelper.SinhMaTran(n, m);
 
-            MangHaiChieuHelper.TachChanLe(matrix, out int[] mangChan, out int[] mangLe);
+            // 2. In mảng
+            Console.WriteLine("\nMa tran ngau nhien [10, 100]:");
+            MangHaiChieuHelper.InMaTran(a, n, m);
 
-            Console.WriteLine("\n--- KET QUA PHAN LOAI CHAN LE ---");
-            Console.WriteLine($"Mang cac so chan ({mangChan.Length} phan tu): [{string.Join(", ", mangChan)}]");
-            Console.WriteLine($"Mang cac so le ({mangLe.Length} phan tu):   [{string.Join(", ", mangLe)}]");
+            // 3. Tách mảng chẵn và lẻ
+            int[] mangChan, mangLe;
+            MangHaiChieuHelper.TachChanLe(a, n, m, out mangChan, out mangLe);
+
+            Console.WriteLine($"\nMang cac so chan ({mangChan.Length} so): [{string.Join(", ", mangChan)}]");
+            Console.WriteLine($"Mang cac so le ({mangLe.Length} so):   [{string.Join(", ", mangLe)}]");
         }
     }
 }

@@ -5,67 +5,40 @@ namespace NNLTC.Phan5_MangArrayList
 {
     /// <summary>
     /// BÀI 15: MẢNG MỘT CHIỀU & DANH SÁCH SỐ NGUYÊN TỐ
-    /// Yêu cầu: Viết các phương thức thành viên sau:
-    /// • Nhập mảng gồm n phần tử
-    /// • In mảng ra màn hình
-    /// • Tìm phần tử lớn nhất và nhỏ nhất trong mảng
-    /// • Trả về mảng các số nguyên tố
     /// </summary>
     public class MangMotChieuHelper
     {
-        /// <summary>
-        /// Phương thức nhập mảng gồm n số nguyên từ bàn phím
-        /// </summary>
-        /// <param name="n">Số phần tử của mảng</param>
-        /// <returns>Mảng các số nguyên int[]</returns>
+        // 1. Nhập mảng n phần tử
         public static int[] NhapMang(int n)
         {
             int[] arr = new int[n];
             for (int i = 0; i < n; i++)
             {
-                while (true)
-                {
-                    Console.Write($"A[{i}] = ");
-                    if (int.TryParse(Console.ReadLine(), out arr[i]))
-                    {
-                        break;
-                    }
-                    Console.WriteLine("Gia tri khong hop le! Vui long nhap so nguyen.");
-                }
+                Console.Write($"A[{i}] = ");
+                arr[i] = int.Parse(Console.ReadLine() ?? "0");
             }
             return arr;
         }
 
-        /// <summary>
-        /// Phương thức in mảng các số nguyên ra màn hình
-        /// </summary>
-        /// <param name="arr">Mảng cần in</param>
-        /// <param name="tieuDe">Tiêu đề hiển thị</param>
-        public static void InMang(int[] arr, string tieuDe = "Mang")
+        // 2. In mảng
+        public static void InMang(int[] arr)
         {
             if (arr == null || arr.Length == 0)
             {
-                Console.WriteLine($"{tieuDe}: [Rỗng]");
+                Console.WriteLine("[] (Mang rong)");
                 return;
             }
-            Console.WriteLine($"{tieuDe}: [{string.Join(", ", arr)}]");
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Console.Write(arr[i] + " ");
+            }
+            Console.WriteLine();
         }
 
-        /// <summary>
-        /// Phương thức tìm phần tử lớn nhất và nhỏ nhất trong mảng sử dụng tham số out
-        /// </summary>
-        /// <param name="arr">Mảng đầu vào</param>
-        /// <param name="max">Giá trị lớn nhất</param>
-        /// <param name="min">Giá trị nhỏ nhất</param>
+        // 3. Tìm phần tử lớn nhất và nhỏ nhất
         public static void TimMaxMin(int[] arr, out int max, out int min)
         {
-            if (arr == null || arr.Length == 0)
-            {
-                max = 0;
-                min = 0;
-                return;
-            }
-
             max = arr[0];
             min = arr[0];
             for (int i = 1; i < arr.Length; i++)
@@ -75,79 +48,58 @@ namespace NNLTC.Phan5_MangArrayList
             }
         }
 
-        /// <summary>
-        /// Hàm phụ trợ kiểm tra 1 số nguyên có phải số nguyên tố hay không
-        /// </summary>
-        /// <param name="num">Số nguyên cần kiểm tra</param>
-        /// <returns>true nếu là số nguyên tố, ngược lại false</returns>
-        public static bool LaSoNguyenTo(int num)
+        // Hàm kiểm tra số nguyên tố
+        private static bool LaSoNguyenTo(int num)
         {
             if (num < 2) return false;
-            int canBacHai = (int)Math.Sqrt(num);
-            for (int i = 2; i <= canBacHai; i++)
+            for (int i = 2; i <= Math.Sqrt(num); i++)
             {
                 if (num % i == 0) return false;
             }
             return true;
         }
 
-        /// <summary>
-        /// Phương thức lọc và trả về một mảng chứa các số nguyên tố có trong mảng ban đầu
-        /// </summary>
-        /// <param name="arr">Mảng số nguyên đầu vào</param>
-        /// <returns>Mảng int[] các số nguyên tố</returns>
+        // 4. Trả về mảng các số nguyên tố
         public static int[] LayDanhSachSoNguyenTo(int[] arr)
         {
-            List<int> primeList = new List<int>();
-            foreach (int item in arr)
+            List<int> dsSNT = new List<int>();
+            for (int i = 0; i < arr.Length; i++)
             {
-                if (LaSoNguyenTo(item))
+                if (LaSoNguyenTo(arr[i]))
                 {
-                    primeList.Add(item);
+                    dsSNT.Add(arr[i]);
                 }
             }
-            return primeList.ToArray();
+            return dsSNT.ToArray();
         }
     }
 
     public static class Bai15_MangMotChieu
     {
-        /// <summary>
-        /// Phương thức thực thi chính của Bài 15
-        /// </summary>
         public static void Chay()
         {
-            Console.WriteLine("==================================================================");
-            Console.WriteLine("   BÀI 15: MẢNG 1 CHIỀU (NHẬP, XUẤT, TÌM MAX/MIN, SỐ NGUYÊN TỐ)   ");
-            Console.WriteLine("==================================================================");
+            Console.WriteLine("=== BÀI 15: MẢNG 1 CHIỀU ===");
 
-            int n;
-            while (true)
-            {
-                Console.Write("Nhap so luong phan tu n (n > 0): ");
-                if (int.TryParse(Console.ReadLine(), out n) && n > 0)
-                {
-                    break;
-                }
-                Console.WriteLine("So phan tu phai la so nguyen duong!");
-            }
+            Console.Write("Nhap so phan tu n: ");
+            int n = int.Parse(Console.ReadLine() ?? "0");
 
             // 1. Nhập mảng
             int[] arr = MangMotChieuHelper.NhapMang(n);
 
-            Console.WriteLine("\n--- KET QUA ---");
             // 2. In mảng
-            MangMotChieuHelper.InMang(arr, "Mang vua nhap");
+            Console.Write("\nMang vua nhap la: ");
+            MangMotChieuHelper.InMang(arr);
 
-            // 3. Tìm phần tử lớn nhất và nhỏ nhất
-            MangMotChieuHelper.TimMaxMin(arr, out int max, out int min);
+            // 3. Tìm Max và Min
+            int max, min;
+            MangMotChieuHelper.TimMaxMin(arr, out max, out min);
             Console.WriteLine($"Phan tu lon nhat (Max): {max}");
             Console.WriteLine($"Phan tu nho nhat (Min): {min}");
 
-            // 4. Trả về mảng các số nguyên tố
+            // 4. Lấy và in mảng các số nguyên tố
             int[] mangSNT = MangMotChieuHelper.LayDanhSachSoNguyenTo(arr);
-            MangMotChieuHelper.InMang(mangSNT, "Mang cac so nguyen to");
-            Console.WriteLine("==================================================================");
+            Console.Write("Cac so nguyen to trong mang: ");
+            MangMotChieuHelper.InMang(mangSNT);
         }
     }
 }
