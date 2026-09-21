@@ -1,10 +1,35 @@
-﻿# Ngôn ngữ lập trình C# - Bài tập thực hành (Bài 1 -> Bài 17)
+# Ngôn ngữ lập trình C# - Bài tập & Thực hành
 
-Dự án tổng hợp bài giải và thực hành môn **Ngôn ngữ lập trình C#** bao gồm 17 bài tập từ cơ bản đến nâng cao.
+Kho lưu trữ tổng hợp bài thực hành và bài tập môn **Ngôn ngữ lập trình C#**, bao gồm:
+1. **Thực hành 01:** Class Library – Project Reference – Unit Test với xUnit (`NNLTCSharp.sln`).
+2. **Tổng hợp 17 bài tập thực hành C#** từ cơ bản đến nâng cao (`NNLTC.csproj`).
 
 ---
 
-## 📑 Danh mục bài tập
+## 🚀 THỰC HÀNH 01: CLASS LIBRARY – PROJECT REFERENCE – UNIT TEST (XUNIT)
+
+Cấu trúc dự án theo chuẩn tài liệu thực hành:
+* 📂 **`MyLib` (Class Library):** Thư viện chứa lớp `LibBaiTap` với hàm `GiaiPTBac2` giải phương trình bậc hai xử lý chính xác số thực với sai số $\text{EPS} = 10^{-9}$.
+* 📂 **`Buoi01Prj` (Console App):** Chương trình Console tham chiếu đến `MyLib`, cho phép chạy test mẫu và nhập hệ số $a, b, c$ từ bàn phím. Minh họa cấu hình `<StartupObject>` khi có nhiều hàm `Main()`.
+* 📂 **`MyLib.Tests` (xUnit Test Project):** Bộ 9 Unit Test tự động kiểm thử toàn bộ các nhánh rẽ và trường hợp biên (vô số nghiệm, vô nghiệm, phương trình bậc nhất, nghiệm kép, 2 nghiệm phân biệt có hoán đổi thứ tự tăng dần, sai số số thực).
+
+### Lệnh chạy nhanh Thực hành 01:
+```bash
+# Build toàn bộ Solution
+dotnet build NNLTCSharp.sln
+
+# Chạy Unit Test (xUnit)
+dotnet test NNLTCSharp.sln
+
+# Chạy ứng dụng Console giải phương trình bậc hai
+dotnet run --project Buoi01Prj/Buoi01Prj.csproj
+```
+
+📄 **Xem chi tiết tài liệu & lời giải 8 câu hỏi ôn tập tại:** 👉 [BAITAP_THUCHANH_01.md](BAITAP_THUCHANH_01.md)
+
+---
+
+## 📑 DANH MỤC 17 BÀI TẬP THỰC HÀNH C# CƠ BẢN
 
 ### 1. Nhập xuất dữ liệu cơ bản
 - **Bài 1:** Chương trình nhập họ tên và xuất họ tên. Hướng dẫn sử dụng `ildasm.exe` và `ilasm.exe` để xem và dịch mã MSIL.
@@ -35,31 +60,8 @@ Dự án tổng hợp bài giải và thực hành môn **Ngôn ngữ lập trì
 
 ---
 
-## 🛠️ Hướng dẫn cài đặt & Chạy chương trình
-
-### Yêu cầu môi trường
-- [.NET SDK](https://dotnet.microsoft.com/download) (phiên bản .NET 6.0, 7.0, 8.0 hoặc .NET 10.0+)
-- Visual Studio / Visual Studio Code / JetBrains Rider
-
-### Cách chạy chương trình
-1. Mở terminal tại thư mục dự án:
+## 🛠️ Hướng dẫn Chạy Menu 17 Bài Tập:
 ```bash
-dotnet build
-dotnet run
+dotnet build NNLTC.csproj
+dotnet run --project NNLTC.csproj
 ```
-2. Màn hình console sẽ hiển thị menu tổng hợp từ Bài 1 đến Bài 17. Nhập số tương ứng để chạy từng bài tập.
-
----
-
-## 🔍 Hướng dẫn Bài 1: MSIL Disassembler (`ildasm`) & Assembler (`ilasm`)
-
-1. Mở **Developer Command Prompt for Visual Studio**.
-2. Di chuyển đến thư mục chứa file PE output (`bin/Debug/net.../`):
-3. **Disassemble (Trích xuất MSIL từ file .dll/.exe sang .il):**
-   ```bash
-   ildasm NNLTC.dll /out=NNLTC.il
-   ```
-4. **Assemble (Biên dịch ngược lại từ mã MSIL .il sang .dll/.exe):**
-   ```bash
-   ilasm NNLTC.il /dll /output=NNLTC_rebuilt.dll
-   ```

@@ -1,8 +1,9 @@
-﻿## Visual Studio & .NET Gitignore
-bin/
-obj/
+## Visual Studio & .NET Gitignore
+[Bb]in/
+[Oo]bj/
 .vs/
 *.user
 *.suo
 [Dd]ebug/
 [Rr]elease/
+TestResults/
