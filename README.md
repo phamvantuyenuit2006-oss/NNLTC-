@@ -1,67 +1,46 @@
 # Ngôn ngữ lập trình C# - Bài tập & Thực hành
 
-Kho lưu trữ tổng hợp bài thực hành và bài tập môn **Ngôn ngữ lập trình C#**, bao gồm:
-1. **Thực hành 01:** Class Library – Project Reference – Unit Test với xUnit (`NNLTCSharp.sln`).
-2. **Tổng hợp 17 bài tập thực hành C#** từ cơ bản đến nâng cao (`NNLTC.csproj`).
+Kho lưu trữ tổng hợp toàn bộ bài thực hành và bài tập môn **Ngôn ngữ lập trình C#**, bao gồm:
+1. 🚀 **Thực hành 01:** Class Library – Project Reference – Unit Test với xUnit (`NNLTCSharp.sln`).
+2. 🎯 **Thực hành 02:** Lập trình hướng đối tượng trong C# (OOP: Thiết kế lớp cơ bản, Lớp nâng cao, Mảng/List/Indexer, Interface, Delegate/Event, Kế thừa & Đa hình) (`ThucHanh02`).
+3. 📑 **Tổng hợp 17 bài tập thực hành C# cơ bản đến nâng cao** (`NNLTC.csproj`).
 
 ---
 
 ## 🚀 THỰC HÀNH 01: CLASS LIBRARY – PROJECT REFERENCE – UNIT TEST (XUNIT)
+* 📂 **`MyLib`:** Thư viện lớp giải phương trình bậc hai `GiaiPTBac2` xử lý chính xác sai số số thực với $\text{EPS} = 10^{-9}$.
+* 📂 **`Buoi01Prj`:** Console App tham chiếu `MyLib`, minh họa cấu hình `<StartupObject>` khi có nhiều hàm `Main()`.
+* 📂 **`MyLib.Tests`:** Bộ 9 Unit Test xUnit tự động kiểm thử toàn bộ các nhánh rẽ.
 
-Cấu trúc dự án theo chuẩn tài liệu thực hành:
-* 📂 **`MyLib` (Class Library):** Thư viện chứa lớp `LibBaiTap` với hàm `GiaiPTBac2` giải phương trình bậc hai xử lý chính xác số thực với sai số $\text{EPS} = 10^{-9}$.
-* 📂 **`Buoi01Prj` (Console App):** Chương trình Console tham chiếu đến `MyLib`, cho phép chạy test mẫu và nhập hệ số $a, b, c$ từ bàn phím. Minh họa cấu hình `<StartupObject>` khi có nhiều hàm `Main()`.
-* 📂 **`MyLib.Tests` (xUnit Test Project):** Bộ 9 Unit Test tự động kiểm thử toàn bộ các nhánh rẽ và trường hợp biên (vô số nghiệm, vô nghiệm, phương trình bậc nhất, nghiệm kép, 2 nghiệm phân biệt có hoán đổi thứ tự tăng dần, sai số số thực).
+📄 **Xem chi tiết:** [BAITAP_THUCHANH_01.md](BAITAP_THUCHANH_01.md) | [CAU_HOI_ON_TAP.md](CAU_HOI_ON_TAP.md)
 
-### Lệnh chạy nhanh Thực hành 01:
 ```bash
-# Build toàn bộ Solution
-dotnet build NNLTCSharp.sln
-
-# Chạy Unit Test (xUnit)
-dotnet test NNLTCSharp.sln
-
-# Chạy ứng dụng Console giải phương trình bậc hai
+dotnet test MyLib.Tests/MyLib.Tests.csproj
 dotnet run --project Buoi01Prj/Buoi01Prj.csproj
 ```
 
-📄 **Xem chi tiết tài liệu & lời giải 8 câu hỏi ôn tập tại:** 👉 [BAITAP_THUCHANH_01.md](BAITAP_THUCHANH_01.md)
-
 ---
 
-## 📑 DANH MỤC 17 BÀI TẬP THỰC HÀNH C# CƠ BẢN
+## 🎯 THỰC HÀNH 02: LẬP TRÌNH HƯỚNG ĐỐI TƯỢNG TRONG C# (OOP)
+Dự án hoàn chỉnh gồm 18 bài tập chia theo 3 phần trọng tâm:
+* 🔹 **Phần 1: Thiết kế lớp cơ bản:** Lớp `SinhVien`, `Point` (toán tử +, -, khoảng cách, trung điểm), `Person` (`IsLiving`), `PhanSo` (Overload toán tử 1 ngôi, 2 ngôi, so sánh), `DonThuc` (tính giá trị, đạo hàm).
+* 🔹 **Phần 2: Thiết kế lớp nâng cao:** Lớp `ArrayPoint` (ArrayList + Indexer), `PersonList` (`LivingPeople`), `DaySo` (mảng 1 chiều, tìm số chẵn), `MangHaiChieu` (mảng 2 chiều, tìm số nguyên tố), `DaThuc` (n+1 đơn thức), `DayPhanSo` (tổng phân số), `PhongBan` (tính lương phòng ban trừ ngày vắng).
+* 🔹 **Phần 3: Kế thừa & Đa hình, Interface, Delegate, Event:** Sắp xếp bằng `Array.Sort` (`IComparable`), Sắp xếp mảng tổng quát bằng `Interface` (`IMyComparer`), Sắp xếp bằng `Delegate`, Lớp `ConsoleMenu` tổng quát (kế thừa giải PT bậc 2), Lương nhân viên kinh doanh & sản xuất (`NhanVien`), Điểm thi tin học thí sinh chuyên & siêu cúp (`ThiSinh`).
+* 📂 **`ThucHanh02.Tests`:** Bộ 15 Unit Test tự động kiểm thử toàn diện các lớp OOP.
 
-### 1. Nhập xuất dữ liệu cơ bản
-- **Bài 1:** Chương trình nhập họ tên và xuất họ tên. Hướng dẫn sử dụng `ildasm.exe` và `ilasm.exe` để xem và dịch mã MSIL.
-- **Bài 2:** Xuất và nhập chuỗi theo định dạng mẫu.
-- **Bài 3:** Nhập 2 số nguyên $x, y$, tính $x^y$.
-- **Bài 4:** Nhập số nguyên $x, y$ có kiểm tra lỗi hợp lệ (xử lý exception / `TryParse`).
-- **Bài 5:** Menu chức năng tính toán số thực (nhập $x, y$, tính $x^y$, tính căn bậc 2 của $x$ và $y$).
+📄 **Xem chi tiết:** [BAITAP_THUCHANH_02.md](BAITAP_THUCHANH_02.md)
 
-### 2. Tham số phương thức (Tham trị, Tham chiếu `ref`, `out`)
-- **Bài 6:** Tìm giá trị lớn nhất của 3 số nguyên (phương thức return giá trị).
-- **Bài 7:** Kiểm tra số nguyên tố (phương thức trả về kiểu `bool`).
-- **Bài 8:** Hoán vị 2 số thực sử dụng từ khóa `ref`.
-- **Bài 9:** Tìm giá trị lớn nhất và nhỏ nhất của 3 số thực sử dụng từ khóa `out`.
-
-### 3. Xử lý Chuỗi (`string`, `StringBuilder`)
-- **Bài 10:** Kiểm tra chuỗi đối xứng (Palindrome).
-- **Bài 11:** Trả về chuỗi đảo ngược (sử dụng `StringBuilder`).
-- **Bài 12:** Chuyển chuỗi sang chữ thường, chữ hoa và đếm số từ.
-
-### 4. Xây dựng Lớp cơ bản (OOP)
-- **Bài 13:** Lớp `SinhVien` (Mã SV, Họ tên, Địa chỉ, Năm thứ mấy) có phương thức Nhập và Xuất.
-- **Bài 14:** Lớp `NhanVien` (Họ tên, Mức lương, Số ngày vắng) và phương thức tính lương (trừ 100.000 VNĐ / ngày vắng).
-
-### 5. Mảng & ArrayList
-- **Bài 15:** Mảng 1 chiều (Nhập mảng $n$ phần tử, In mảng, Tìm Max/Min, Trả về mảng các số nguyên tố).
-- **Bài 16:** Nhập mảng họ tên của $n$ người và sắp xếp tăng dần theo bảng chữ cái.
-- **Bài 17:** Mảng 2 chiều (Sinh ngẫu nhiên ma trận $A[n \times m]$ trong đoạn $[10, 100]$, in ma trận, tách ra 2 mảng số chẵn và số lẻ).
-
----
-
-## 🛠️ Hướng dẫn Chạy Menu 17 Bài Tập:
 ```bash
-dotnet build NNLTC.csproj
+# Chạy Menu tương tác Thực hành 02 (Chọn bài từ 1 đến 18)
+dotnet run --project ThucHanh02/ThucHanh02.csproj
+
+# Chạy toàn bộ 24 Unit Test của cả 2 bài thực hành
+dotnet test NNLTCSharp.sln
+```
+
+---
+
+## 📑 DANH MỤC 17 BÀI TẬP C# CƠ BẢN (NNLTC.csproj)
+```bash
 dotnet run --project NNLTC.csproj
 ```

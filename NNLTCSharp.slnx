@@ -3,4 +3,6 @@
   <Project Path="MyLib.Tests/MyLib.Tests.csproj" />
   <Project Path="MyLib/MyLib.csproj" />
   <Project Path="NNLTC.csproj" />
+  <Project Path="ThucHanh02.Tests/ThucHanh02.Tests.csproj" />
+  <Project Path="ThucHanh02/ThucHanh02.csproj" />
 </Solution>

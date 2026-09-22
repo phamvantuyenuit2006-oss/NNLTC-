@@ -11,5 +11,7 @@
     <Compile Remove="MyLib\**" />
     <Compile Remove="Buoi01Prj\**" />
     <Compile Remove="MyLib.Tests\**" />
+    <Compile Remove="ThucHanh02\**" />
+    <Compile Remove="ThucHanh02.Tests\**" />
   </ItemGroup>
 </Project>
